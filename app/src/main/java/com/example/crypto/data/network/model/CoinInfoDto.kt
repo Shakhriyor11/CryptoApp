@@ -1,14 +1,12 @@
-package com.example.crypto.pojo
+package com.example.crypto.data.network.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.crypto.api.ApiFactory.imageBaseURL
-import com.example.crypto.utils.convertTimeStampToTime
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "full_price_list")
-data class CoinPriceInfo(
+data class CoinInfoDto(
     @SerializedName("TYPE")
     @Expose
     val type: String?,
@@ -21,13 +19,13 @@ data class CoinPriceInfo(
     val fromSymbol: String,
     @SerializedName("TOSYMBOL")
     @Expose
-    val toSymbol:  String?,
+    val toSymbol: String?,
     @SerializedName("FLAGS")
     @Expose
     val flags: String?,
     @SerializedName("PRICE")
     @Expose
-    val price: Double?,
+    val price: String?,
     @SerializedName("LASTUPDATE")
     @Expose
     val lastUpdate: Long?,
@@ -60,10 +58,10 @@ data class CoinPriceInfo(
     val openday: Double?,
     @SerializedName("HIGHDAY")
     @Expose
-    val highday: Double?,
+    val highday: String?,
     @SerializedName("LOWDAY")
     @Expose
-    val lowday: Double?,
+    val lowday: String?,
     @SerializedName("OPEN24HOUR")
     @Expose
     val open24hour: Double?,
@@ -151,12 +149,4 @@ data class CoinPriceInfo(
     @SerializedName("IMAGEURL")
     @Expose
     val imageurl: String?
-) {
-    fun getFormattedTime(): String {
-        return convertTimeStampToTime(lastUpdate)
-    }
-
-    fun getFullImageUrl(): String {
-        return imageBaseURL + imageurl
-    }
-}
+)

@@ -1,25 +1,24 @@
-package com.example.crypto.api
+package com.example.crypto.data.network
 
-import com.example.crypto.pojo.CoinInfoListOfData
-import com.example.crypto.pojo.CoinPriceInfoRawData
-import io.reactivex.Single
+import com.example.crypto.data.network.model.CoinNamesListDto
+import com.example.crypto.data.network.model.CoinInfoJsonContainerDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
     @GET("top/totalvolfull")
-    fun getTopCoinsInfo(
+    suspend fun getTopCoinsInfo(
         @Query(PARAMS_QUERY_API_KEY) api_key: String = API_KEY,
         @Query(PARAMS_QUERY_LIMIT) limit: Int = LIMIT,
         @Query(PARAMS_QUERY_TO_SYMBOL) tsym: String = CURRENCY
-    ): Single<CoinInfoListOfData>
+    ): CoinNamesListDto
 
     @GET("pricemultifull")
-    fun getFullPriceList(
+    suspend fun getFullPriceList(
         @Query(PARAMS_QUERY_API_KEY) api_key: String = API_KEY,
         @Query(PARAMS_QUERY_FROM_SYMBOLS) fsyms: String,
         @Query(PARAMS_QUERY_TO_SYMBOLS) tsyms: String = CURRENCY
-    ): Single<CoinPriceInfoRawData>
+    ): CoinInfoJsonContainerDto
 
     companion object {
         private const val PARAMS_QUERY_API_KEY = "api_key"
